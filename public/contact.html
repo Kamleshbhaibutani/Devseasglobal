@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container">
+                <img src="assets/images/dev_new_logo.png" alt="DEVSEAS Global" class="site-logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-categories-dynamic">
+                        <a href="products.html?category=all" class="dropdown-item">All Products</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="nav-item">
+                    <a href="#" onclick="toggleDropdown(event, this)">Catalogue <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-catalogues-dynamic">
+                        <!-- Catalogues will be loaded here dynamically -->
+                    </div>
+                </li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+
+        <!-- 1. Contact Header Section -->
+        <div class="contact-header-section">
+            <div class="container">
+                <h1 data-aos="fade-down">Contact Us</h1>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    Reach out to Devseas Global for any inquiries about our premium products.<br>
+                    Let's work together to meet your needs with excellence and reliability.
+                </p>
+                <div class="breadcrumbs" data-aos="fade-up" data-aos-delay="300">
+                    <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Contact</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Contact Info & Map Section -->
+        <div class="contact-info-section">
+            <div class="container">
+                <!-- Info Cards -->
+                <div class="contact-info-grid">
+                    <!-- Email -->
+                    <div class="c-info-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="c-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="c-details">
+                            <h4>Email Us</h4>
+                            <p>Feel free to contact us at</p>
+                            <a href="mailto:info@devseasglobal.com">info@devseasglobal.com</a>
+                            <p class="small-text">we'll respond promptly</p>
+                        </div>
+                    </div>
+
+                    <!-- First Office -->
+                    <div class="c-info-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="c-details">
+                            <h4>First Office</h4>
+                            <p>FF-16 Kanha Luxuria, Savita Hospital Road,<br>
+                                Parivar Char Rasta,<br>
+                                Vadodara, Gujarat 390025</p>
+                            <div style="margin-top: 10px;">
+                                <a href="tel:+917096656379" style="display: inline;">+91 70966 56379</a>, 
+                                <a href="tel:+916352322122" style="display: inline;">+91 63523 22122</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Office -->
+                    <div class="c-info-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="c-details">
+                            <h4>Second Office</h4>
+                            <p>D-38, 3rd road,<br>
+                                Sardar estate,<br>
+                                Ajwa road, Vadodara 390019</p>
+                            <div style="margin-top: 10px;">
+                                <a href="tel:+919429302953">+91 94293 02953</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Germany Office -->
+                    <div class="c-info-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="c-icon"><i class="fas fa-globe-europe"></i></div>
+                        <div class="c-details">
+                            <h4>Germany Office</h4>
+                            <p>Lüneburger Straße 3, 2.OG (2nd floor),<br>
+                                10557 Berlin, GERMANY</p>
+                            <div style="margin-top: 10px;">
+                                <a href="tel:+4915560547524">+49 155 60547524</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="contact-map" data-aos="zoom-in" data-aos-delay="400">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.0673895916357!2d73.19!3d22.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5f4e7d8db71%3A0x6d6f1d1db9e0ef7f!2sParivar%20Char%20Rasta%2C%20Vadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Request Product Information Form -->
+        <div class="request-form-section">
+            <div class="container">
+                <h2 data-aos="fade-up">Request Product Information</h2>
+                <form class="request-form" data-aos="fade-up" data-aos-delay="200">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name*</label>
+                            <input type="text" id="contactFName" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name*</label>
+                            <input type="text" id="contactLName" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email address*</label>
+                            <input type="email" id="contactEmail" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number*</label>
+                            <input type="tel" id="contactPhone" placeholder="+91-XXXXXXXXXX" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Product Categories & Selection</label>
+                        <p class="form-instruction">Select categories to see available products, then choose specific
+                            products you're interested in.</p>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox"> Pharmaceutical APIs</label>
+                            <label class="checkbox-item"><input type="checkbox"> Pharmaceutical Excipients</label>
+                            <label class="checkbox-item"><input type="checkbox"> Antacid Products</label>
+                            <label class="checkbox-item"><input type="checkbox"> Electrolytes</label>
+                            <label class="checkbox-item"><input type="checkbox"> Food & Beverage Ingredients</label>
+                            <label class="checkbox-item"><input type="checkbox"> Nutraceuticals</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Request Information</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Enhanced Footer -->
+        <footer class="main-footer" data-aos="fade-up">
+            <div class="container">
+                <div class="footer-top">
+                    <div class="footer-logo-col">
+                        <div class="logo-container">
+                            <img src="assets/images/dev_new_logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                                loading="lazy">
+                        </div>
+                        <p>We are committed to empowering businesses worldwide by offering premium export solutions
+                            tailored
+                            to their unique needs. With extensive experience and a profound understanding of
+                            international
+                            markets, we take pride in delivering exceptional service, unmatched reliability, and
+                            outstanding
+                            value.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4 class="footer-heading">Quick Links</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4 class="footer-heading">Product Categories</h4>
+                        <ul>
+                            <li><a href="products.html">Industrial Manufacturing</a></li>
+                            <li><a href="products.html">Agro & Agriculture</a></li>
+                            <li><a href="products.html">Food & Beverage</a></li>
+                            <li><a href="products.html">Cosmetics & Personal Care</a></li>
+                            <li><a href="products.html">Solvent Processing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4 class="footer-heading">Contact Info</h4>
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>First Office:</strong> FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat 390025</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+917096656379" style="color: inherit; text-decoration: none;">+91 70966 56379</a>, 
+                                    <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523 22122</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>Second Office:</strong> D-38, 3rd road, Sardar estate, Ajwa road, Vadodara 390019</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+919429302953" style="color: inherit; text-decoration: none;">+91 94293 02953</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-globe-europe"></i>
+                                <span><strong>Germany Office:</strong> Lüneburger Straße 3, 2.OG (2nd floor), 10557 Berlin, GERMANY</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 155 60547524</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@devseasglobal.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div
+                        style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Quality Policy</a>
+                        </div>
+                    </div>
+                    <div class="powered-by"
+                        style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                        <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                        <a href="https://www.tejaskpaisoftware.com/" target="_blank" style="text-decoration: none;">
+                            <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                                style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                                loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+        <!-- Optimized Scripts -->
+        <script src="js/script.js" defer></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init({ duration: 1000, once: false, mirror: true, offset: 100 });
+
+            // Form submission logic
+            document.querySelector('.request-form').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = "Sending...";
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(`${window.API_BASE_URL || ''}/api/contact`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: document.getElementById('contactFName').value + " " + document.getElementById('contactLName').value,
+                            email: document.getElementById('contactEmail').value,
+                            phone: document.getElementById('contactPhone').value,
+                            message: "Product Inquiry from website"
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert(data.message || "Message sent successfully!");
+                        this.reset();
+                    } else {
+                        alert(data.error || "Failed to send message.");
+                    }
+                } catch (error) {
+                    alert("Network error. Could not send message.");
+                } finally {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            });
+        </script>
+
+
+</body>
+
+</html>

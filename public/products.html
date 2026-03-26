@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container" style="text-decoration: none;">
+                <img src="assets/images/dev_new_logo.png" alt="DevSeas Global" class="site-logo"
+                    style="height: 50px; width: auto;">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" class="active" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-categories-dynamic">
+                        <a href="products.html?category=all" class="dropdown-item">All Products</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="nav-item">
+                    <a href="#" onclick="toggleDropdown(event, this)">Catalogue <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-catalogues-dynamic">
+                        <!-- Catalogues will be loaded here dynamically -->
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>We manufacture a wide range of high-quality Pharmaceutical APIs (Active Pharmaceutical Ingredients) and
+                Excipients.</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Filter Section -->
+        <div class="products-filter-section" data-aos="fade-up">
+            <div class="filter-row">
+                <div class="search-group">
+                    <label class="filter-label">Search Products</label>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Search by name, CAS number, or application...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Products</option>
+                        <option value="antacids">Antacids</option>
+                        <option value="excipients">Excipients</option>
+                        <option value="electrolytes">Electrolytes</option>
+                        <option value="food-beverages">Food & Beverages</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Sort By</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Info -->
+        <div class="results-info" data-aos="fade-up" data-aos-delay="100">
+            <span id="resultsCount">Showing 8 of 8 products</span>
+            <div class="view-options">
+                <div class="view-btn active"><i class="fas fa-th-large"></i></div>
+                <div class="view-btn"><i class="fas fa-list"></i></div>
+            </div>
+        </div>
+
+        <!-- Enhanced Product Grid -->
+        <div class="product-grid" id="productGrid"
+            style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+        </div>
+
+
+    </div>
+
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-col">
+                    <div class="logo-container">
+                        <img src="assets/images/dev_new_logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                            loading="lazy">
+                    </div>
+                    <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
+                        to their unique needs. With extensive experience and a profound understanding of international
+                        markets, we take pride in delivering exceptional service, unmatched reliability, and outstanding
+                        value.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Product Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Industrial Manufacturing</a></li>
+                        <li><a href="products.html">Agro & Agriculture</a></li>
+                        <li><a href="products.html">Food & Beverage</a></li>
+                        <li><a href="products.html">Cosmetics & Personal Care</a></li>
+                        <li><a href="products.html">Solvent Processing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Contact Info</h4>
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>First Office:</strong> FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat 390025</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+917096656379" style="color: inherit; text-decoration: none;">+91 70966 56379</a>, 
+                                    <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523 22122</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>Second Office:</strong> D-38, 3rd road, Sardar estate, Ajwa road, Vadodara 390019</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+919429302953" style="color: inherit; text-decoration: none;">+91 94293 02953</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-globe-europe"></i>
+                                <span><strong>Germany Office:</strong> Lüneburger Straße 3, 2.OG (2nd floor), 10557 Berlin, GERMANY</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 155 60547524</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@devseasglobal.com</span>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Quality Policy</a>
+                    </div>
+                </div>
+                <div class="powered-by"
+                    style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                    <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                    <a href="https://www.tejaskpaisoftware.com/" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                            style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                            loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+
+        // Filter Functionality connected to Live Database
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const sortFilter = document.getElementById('sortFilter');
+            const productGrid = document.getElementById('productGrid');
+            const resultsCount = document.getElementById('resultsCount');
+
+            let allProducts = [];
+
+            async function fetchProductsFromAPI() {
+                try {
+                    // Fetch categories to populate dropdown dynamically
+                    const catRes = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
+                    const categories = await catRes.json();
+
+                    categoryFilter.innerHTML = '<option value="all">All Products</option>';
+                    categories.forEach(cat => {
+                        categoryFilter.innerHTML += `<option value="${cat.slug}">${cat.name}</option>`;
+                    });
+
+                    // Check URL params for initial category filter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const initialCategory = urlParams.get('category');
+                    if (initialCategory) categoryFilter.value = initialCategory;
+
+                    // Fetch products
+                    const prodRes = await fetch(`${window.API_BASE_URL || ''}/api/products`);
+                    allProducts = await prodRes.json();
+
+                    renderProducts();
+
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    productGrid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">Could not connect to database. Please refresh.</p>';
+                }
+            }
+
+            function renderProducts() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value;
+                const selectedSort = sortFilter.value;
+
+                // Filter
+                let filtered = allProducts.filter(p => {
+                    const name = (p.name || '').toLowerCase();
+                    const cas = (p.casNumber || '').toLowerCase();
+                    const catSlug = p.category ? p.category.slug : 'all';
+
+                    const matchesSearch = name.includes(searchTerm) || cas.includes(searchTerm);
+                    const matchesCategory = selectedCategory === 'all' || catSlug === selectedCategory;
+
+                    return matchesSearch && matchesCategory;
+                });
+
+                // Sort
+                filtered.sort((a, b) => {
+                    const nameA = (a.name || '').toLowerCase();
+                    const nameB = (b.name || '').toLowerCase();
+
+                    if (selectedSort === 'name-asc') return nameA.localeCompare(nameB);
+                    if (selectedSort === 'name-desc') return nameB.localeCompare(nameA);
+                    return new Date(b.createdAt) - new Date(a.createdAt); // newest by default
+                });
+
+                // Render into grid
+                productGrid.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    productGrid.innerHTML = '<p style="color:#94a3b8; text-align:center; grid-column:1/-1; padding:40px;">No products match your search criteria.</p>';
+                    resultsCount.textContent = `Showing 0 products`;
+                    return;
+                }
+
+                let delayCounter = 0;
+                filtered.forEach(p => {
+                    const imgHtml = p.image 
+                        ? `<img src="${window.API_BASE_URL || ''}/uploads/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">`
+                        : '';
+                    const catName = p.category ? p.category.name : 'Uncategorized';
+                    const cas = p.casNumber || 'N/A';
+                    const desc = p.description || '';
+                    const purity = p.purity || '';
+                    const grade = p.grade || 'IP/BP/USP';
+                    const badgeColor = '#2dd4bf'; // Standard teal for purity
+
+                    productGrid.innerHTML += `
+                    <div class="product-card-enhanced" data-aos="fade-up" data-aos-delay="${(delayCounter * 100) + 100}">
+                        <div class="pc-header">
+                            <span class="stock-status" style="background:${badgeColor}20; color:${badgeColor}; border:1px solid ${badgeColor}40;">${purity}</span>
+                            <span class="grade-badge">${grade}</span>
+                        </div>
+                        <div class="pc-image-container">
+                            ${imgHtml}
+                        </div>
+                        <h3 class="pc-title">${p.name}</h3>
+                        <div class="pc-meta">
+                            <div><strong>CAS:</strong> ${cas}</div>
+                            <div><strong>Category:</strong> ${catName}</div>
+                        </div>
+                        <p class="pc-desc">${desc.substring(0, 75)}${desc.length > 75 ? '...' : ''}</p>
+                        <div class="app-tags">
+                            <span class="app-tag">${catName}</span>
+                        </div>
+                        <div class="pc-footer">
+                            <span class="contact-pricing">${p.price ? 'Price ₹' + p.price : '&nbsp;'}</span>
+                            <a href="contact.html?product=${encodeURIComponent(p.name)}" class="btn-full" style="text-align:center; display:block; text-decoration:none;">Get More Details</a>
+                        </div>
+                    </div>
+                    `;
+                    delayCounter++;
+                });
+
+                resultsCount.textContent = `Showing ${filtered.length} of ${allProducts.length} products`;
+
+                if (window.AOS) {
+                    setTimeout(() => window.AOS.refresh(), 100);
+                }
+            }
+
+            // Listeners
+            searchInput.addEventListener('input', renderProducts);
+            categoryFilter.addEventListener('change', renderProducts);
+            sortFilter.addEventListener('change', renderProducts);
+
+            // Fetch
+            fetchProductsFromAPI();
+        });
+    </script>
+
+</body>
+
+</html>

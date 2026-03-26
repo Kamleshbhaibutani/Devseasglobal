@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container">
+                <img src="assets/images/dev_new_logo.png" alt="DEVSEAS Global" class="site-logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-categories-dynamic">
+                        <a href="products.html?category=all" class="dropdown-item">All Products</a>
+                    </div>
+                </li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li class="nav-item">
+                    <a href="#" onclick="toggleDropdown(event, this)">Catalogue <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu dropdown-catalogues-dynamic">
+                        <!-- Catalogues will be loaded here dynamically -->
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-down">About Devseas Global</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Innovating chemistry. Powering industries.</p>
+        </div>
+    </div>
+
+    <!-- Section 1: Who We Are -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text-col" data-aos="fade-right">
+                    <h2 class="section-title">Connecting Global Markets with Expertise and Trust</h2>
+                    <p>At <strong>Devseas Global</strong>, we are committed to empowering businesses worldwide by
+                        offering premium export solutions tailored to their unique needs. With extensive experience and
+                        a profound understanding of international markets, we take pride in delivering exceptional
+                        service, unmatched reliability, and outstanding value.</p>
+                    <p>Our team of seasoned experts excels in sourcing, logistics, and compliance, ensuring that every
+                        product reaches its destination efficiently and adheres to global standards. From meticulous
+                        documentation to streamlined freight management, we handle every detail, making the export
+                        process smooth and worry-free for our clients.</p>
+
+                    <div class="about-stats-row">
+                        <div class="stat-item">
+                            <span class="stat-num">15+</span>
+                            <span class="stat-lbl">Years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">50+</span>
+                            <span class="stat-lbl">Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">20+</span>
+                            <span class="stat-lbl">Countries</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="about-image-col" data-aos="fade-left">
+                    <img src="assets/images/Boatimg.jpg" alt="Cargo Ship at Port" class="about-img" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Mission & Vision -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To connect global markets by delivering reliable, efficient, and high-quality export solutions.
+                        We strive to empower businesses worldwide through exceptional service, ethical practices, and a
+                        commitment to excellence, fostering long-lasting partnerships built on trust and mutual growth.
+                    </p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="mission-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To be a global leader in export solutions, renowned for our innovation, integrity, and unwavering
+                        dedication to customer success. We aim to bridge international markets, creating a world where
+                        businesses thrive through seamless trade and sustainable partnerships.</p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="mission-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Our Values</h3>
+                    <p>We believe in precision, purity, and performance. Every process is driven by advanced technology
+                        and strict adherence to global quality standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Industries We Serve -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Industries We Serve</h2>
+                <p>Delivering quality chemicals and ingredients across a wide range of global industries</p>
+            </div>
+
+            <div class="category-grid">
+                <!-- Card 1: Industrial Manufacturing -->
+                <div class="category-card card-antacids" data-aos="fade-up" data-aos-delay="100">
+                    <div class="cat-icon"><i class="fas fa-industry"></i></div>
+                    <h3>Industrial Manufacturing</h3>
+                    <p>We supply high-performance industrial chemicals that power manufacturing processes across
+                        sectors. Our products meet rigorous quality standards to support efficient, safe, and
+                        sustainable production at scale.</p>
+                    <a href="products.html" class="cat-badge">View Products</a>
+                </div>
+
+                <!-- Card 2: Agro & Agriculture -->
+                <div class="category-card card-food" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cat-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Agro &amp; Agriculture</h3>
+                    <p>We provide essential agrochemical inputs and nutrient-grade ingredients that support
+                        modern agriculture. Our solutions help enhance crop yield, soil health, and overall
+                        farm productivity.</p>
+                    <a href="products.html" class="cat-badge">View Products</a>
+                </div>
+
+                <!-- Card 3: Food & Beverage -->
+                <div class="category-card card-ors" data-aos="fade-up" data-aos-delay="300">
+                    <div class="cat-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Food &amp; Beverage</h3>
+                    <p>We source and supply food-grade ingredients and additives that comply with international
+                        safety standards. Our offerings support formulation teams in creating products that are
+                        safe, consistent, and consumer-ready.</p>
+                    <a href="products.html" class="cat-badge">View Products</a>
+                </div>
+
+                <!-- Card 4: Cosmetics & Personal Care -->
+                <div class="category-card card-pharma" data-aos="fade-up" data-aos-delay="400">
+                    <div class="cat-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Cosmetics &amp; Personal Care</h3>
+                    <p>We supply cosmetic-grade ingredients for skincare, haircare, and personal care
+                        formulations. Our portfolio includes functional actives, emollients, and excipients
+                        that meet global cosmetic regulations.</p>
+                    <a href="products.html" class="cat-badge">View Products</a>
+                </div>
+
+                <!-- Card 5: Solvent Processing -->
+                <div class="category-card card-antacids" data-aos="fade-up" data-aos-delay="500">
+                    <div class="cat-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Solvent Processing</h3>
+                    <p>We offer a range of high-purity solvents suited for extraction, synthesis, and
+                        purification processes. Our solvent solutions are designed to meet the precision
+                        demands of laboratory and industrial processing environments.</p>
+                    <a href="products.html" class="cat-badge">View Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Core Values -->
+    <section class="cert-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Core Values</h2>
+                <p>Values That Define Us, Drive Us and Unite Us!</p>
+            </div>
+
+            <div class="cert-grid"
+                style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; margin-top: 40px;">
+
+                <!-- Global Expertise -->
+                <div class="cert-card cert-iso9001" data-aos="fade-up" data-aos-delay="100"
+                    style="display:flex; flex-direction:column; gap:14px; padding: 32px 28px;">
+                    <div class="cert-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3 style="font-size:1.2rem;">Global Expertise</h3>
+                    <p style="font-size:0.92rem; line-height:1.65; opacity:0.85;">With years of experience in
+                        international trade, we understand the nuances of global markets. Our team has deep knowledge of
+                        regulations, logistics, and market trends, ensuring your goods are exported smoothly and
+                        efficiently. We help you navigate complex trade routes with confidence.</p>
+                </div>
+
+                <!-- Comprehensive Solutions -->
+                <div class="cert-card cert-gmp" data-aos="fade-up" data-aos-delay="200"
+                    style="display:flex; flex-direction:column; gap:14px; padding: 32px 28px;">
+                    <div class="cert-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3 style="font-size:1.2rem;">Comprehensive Solutions</h3>
+                    <p style="font-size:0.92rem; line-height:1.65; opacity:0.85;">We offer end-to-end export services
+                        tailored to your needs, from documentation and compliance to logistics and delivery. Our goal is
+                        to simplify every step of the process, providing seamless solutions that save you time and
+                        reduce hassle. Whatever your export requirements, we've got you covered.</p>
+                </div>
+
+                <!-- Wide Network -->
+                <div class="cert-card cert-iso14001" data-aos="fade-up" data-aos-delay="300"
+                    style="display:flex; flex-direction:column; gap:14px; padding: 32px 28px;">
+                    <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3 style="font-size:1.2rem;">Wide Network</h3>
+                    <p style="font-size:0.92rem; line-height:1.65; opacity:0.85;">Our extensive network of partners and
+                        agents across multiple regions allows us to operate in a wide range of industries and markets.
+                        This connectivity helps us expedite shipping, negotiate favorable terms, and manage unforeseen
+                        challenges efficiently. Wherever you need to export, we can help you get there.</p>
+                </div>
+
+                <!-- Client-Centric Approach -->
+                <div class="cert-card cert-fda" data-aos="fade-up" data-aos-delay="400"
+                    style="display:flex; flex-direction:column; gap:14px; padding: 32px 28px;">
+                    <div class="cert-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 style="font-size:1.2rem;">Client-Centric Approach</h3>
+                    <p style="font-size:0.92rem; line-height:1.65; opacity:0.85;">At Devseas Global, we place our
+                        clients at the core of our operations. We take time to understand your unique business needs and
+                        provide personalized services that align with your goals. Our team is always ready to offer
+                        support and guidance to ensure a smooth experience.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Why Choose Us & Our Commitment -->
+    <section class="quality-commit-section">
+        <div class="container">
+            <!-- Why Choose Us -->
+            <div class="quality-container" data-aos="fade-right">
+                <h2 class="quality-title">Why Choose Us</h2>
+                <div class="quality-grid">
+                    <div class="quality-item">
+                        <i class="fas fa-gem q-icon q-icon-gem"></i>
+                        <h4>Product Innovation &amp; Superior Quality</h4>
+                        <p>We deliver innovative and reliable products designed to meet evolving industry standards and
+                            performance requirements.</p>
+                    </div>
+                    <div class="quality-item">
+                        <i class="fas fa-tags q-icon q-icon-tags"></i>
+                        <h4>Cost-Effective Pricing</h4>
+                        <p>Optimized sourcing and efficient operations enable us to offer high-quality products at
+                            competitive market prices.</p>
+                    </div>
+                    <div class="quality-item">
+                        <i class="fas fa-truck-loading q-icon q-icon-supply"></i>
+                        <h4>Reliable &amp; Sustainable Supply Chain</h4>
+                        <p>Our strong supply network ensures reliable availability, responsible sourcing, and timely
+                            delivery worldwide.</p>
+                    </div>
+                    <div class="quality-item">
+                        <i class="fas fa-headset q-icon q-icon-support"></i>
+                        <h4>Dedicated Customer Support</h4>
+                        <p>Our team provides responsive communication, technical guidance, and dependable after-sales
+                            service.</p>
+                    </div>
+                    <div class="quality-item">
+                        <i class="fas fa-handshake q-icon q-icon-partnership"></i>
+                        <h4>Long-Term Business Partnerships</h4>
+                        <p>We focus on building transparent and dependable relationships that support mutual growth and
+                            long-term success.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Commitment Banner -->
+            <div class="commitment-banner" data-aos="fade-left">
+                <h3 class="commitment-title">Our Commitment</h3>
+                <p class="commitment-text">
+                    We deliver safe, compliant, and high-performance ingredients designed to elevate the quality of
+                    pharmaceutical, nutraceutical, cosmetic, and food formulations. With precision-driven manufacturing
+                    and a quality-first mindset, DevSeas Global Pvt. Ltd. is your dependable partner for superior
+                    excipients and cosmetic ingredients.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-col">
+                    <div class="logo-container">
+                        <img src="assets/images/dev_new_logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                            loading="lazy">
+                    </div>
+                    <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
+                        to their unique needs. With extensive experience and a profound understanding of international
+                        markets, we take pride in delivering exceptional service, unmatched reliability, and outstanding
+                        value.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Product Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Industrial Manufacturing</a></li>
+                        <li><a href="products.html">Agro & Agriculture</a></li>
+                        <li><a href="products.html">Food & Beverage</a></li>
+                        <li><a href="products.html">Cosmetics & Personal Care</a></li>
+                        <li><a href="products.html">Solvent Processing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Contact Info</h4>
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>First Office:</strong> FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat 390025</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+917096656379" style="color: inherit; text-decoration: none;">+91 70966 56379</a>, 
+                                    <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523 22122</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>Second Office:</strong> D-38, 3rd road, Sardar estate, Ajwa road, Vadodara 390019</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+919429302953" style="color: inherit; text-decoration: none;">+91 94293 02953</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-globe-europe"></i>
+                                <span><strong>Germany Office:</strong> Lüneburger Straße 3, 2.OG (2nd floor), 10557 Berlin, GERMANY</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 155 60547524</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@devseasglobal.com</span>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Quality Policy</a>
+                    </div>
+                </div>
+                <div class="powered-by"
+                    style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                    <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                    <a href="https://www.tejaskpaisoftware.com/" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                            style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                            loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false, mirror: true, offset: 100 });
+
+    </script>
+
+</body>
+
+</html>

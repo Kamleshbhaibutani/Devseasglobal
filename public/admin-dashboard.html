@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-active: #2dd4bf;
+            --sidebar-text: #94a3b8;
+            --sidebar-text-active: #ffffff;
+            --topbar-bg: #ffffff;
+            --body-bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --primary: #2dd4bf;
+            --primary-dark: #0d9488;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --sidebar-w: 250px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--body-bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar-logo .brand {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-logo .brand span {
+            color: var(--primary);
+        }
+
+        .sidebar-logo small {
+            color: var(--sidebar-text);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px 12px;
+            overflow-y: auto;
+        }
+
+        .nav-section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #475569;
+            padding: 16px 8px 8px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--sidebar-hover);
+            color: #e2e8f0;
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(45, 212, 191, 0.12);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a .icon {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-footer {
+            padding: 16px 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar-footer button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .sidebar-footer button:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Main layout */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Topbar */
+        .topbar {
+            background: var(--topbar-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 28px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .topbar-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Page content */
+        .page-content {
+            padding: 28px;
+            flex: 1;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Stat cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 22px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.teal {
+            background: rgba(45, 212, 191, 0.12);
+            color: var(--primary);
+        }
+
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--info);
+        }
+
+        .stat-icon.amber {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--warning);
+        }
+
+        .stat-icon.green {
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--success);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            background: #f8fafc;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sm {
+            padding: 5px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="brand">DEV<span>SEAS</span></div>
+            <small>Admin Panel</small>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main</div>
+            <a href="/admin/dashboard" class="active">
+                <span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard
+            </a>
+            <div class="nav-section-label">Catalogue</div>
+            <a href="/admin/categories">
+                <span class="icon"><i class="fas fa-tags"></i></span> Categories
+            </a>
+            <a href="/admin/products">
+                <span class="icon"><i class="fas fa-flask"></i></span> Products
+            </a>
+            <div class="nav-section-label">Communication</div>
+            <a href="/admin/dashboard">
+                <span class="icon"><i class="fas fa-envelope"></i></span> Inquiries
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-right">
+                <span style="font-size:0.82rem; color: var(--text-muted);" id="welcomeName">Welcome, Admin</span>
+                <div class="admin-avatar" id="welcomeInitial">A</div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon teal"><i class="fas fa-flask"></i></div>
+                    <div>
+                        <div class="stat-value" id="statProducts">0</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-tags"></i></div>
+                    <div>
+                        <div class="stat-value" id="statCategories">0</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon teal"><i class="fas fa-file-pdf"></i></div>
+                    <div>
+                        <div class="stat-value" id="statCatalogues">0</div>
+                        <div class="stat-label">Catalogues</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon amber"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <div class="stat-value" id="statInquiries">0</div>
+                        <div class="stat-label">Inquiries</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inquiries Table -->
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-clock" style="color:#2dd4bf;margin-right:8px;"></i>Recent Inquiries</span>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn btn-sm btn-secondary" style="background:#fef2f2; color:#ef4444; border-color:#fca5a5;" onclick="clearMessages()"><i class="fas fa-trash"></i> Clear Messages</button>
+                        <button class="btn btn-sm btn-secondary" onclick="fetchData()">Refresh</button>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiriesTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding: 20px;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;">
+                <a href="admin-products.html" class="btn btn-primary"
+                    style="justify-content:center; padding:14px; text-decoration:none;"><i class="fas fa-plus"></i> Add
+                    New Product</a>
+                <a href="admin-categories.html" class="btn btn-secondary"
+                    style="justify-content:center; padding:14px; text-decoration:none;"><i class="fas fa-plus"></i> Add
+                    New Category</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Authentication Check
+        const token = localStorage.getItem('adminToken');
+        const userStr = localStorage.getItem('adminUser');
+
+        if (!token) {
+            window.location.href = '/admin/login';
+        }
+
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
+            document.getElementById('welcomeInitial').textContent = user.name.charAt(0).toUpperCase();
+        }
+
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin/login';
+        }
+
+        async function fetchData() {
+            try {
+                // Fetch inquiries
+                const resInq = await fetch(`${window.API_BASE_URL || ''}/api/inquiries`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (resInq.status === 401 || resInq.status === 403) {
+                    logout();
+                    return;
+                }
+
+                const inquiries = await resInq.json();
+
+                // Update Stat
+                document.getElementById('statInquiries').textContent = inquiries.length;
+
+                // Render Table
+                const tbody = document.getElementById('inquiriesTableBody');
+                if (inquiries.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; color:#94a3b8;"><i class="fas fa-inbox" style="font-size:2rem; margin-bottom:10px; display:block;"></i> No inquiries yet.</td></tr>';
+                } else {
+                    let html = '';
+                    inquiries.slice(0, 10).forEach(inq => {
+                        const date = new Date(inq.createdAt).toLocaleDateString();
+                        html += `
+                        <tr>
+                            <td><strong>${inq.name || '-'}</strong></td>
+                            <td>${inq.email || '-'}</td>
+                            <td>${inq.phone || '—'}</td>
+                            <td style="max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${inq.message || '-'}</td>
+                            <td style="color:#94a3b8;">${date}</td>
+                        </tr>
+                    `;
+                    });
+                    tbody.innerHTML = html;
+                }
+
+                // Fetch Products and Categories count
+                const resProd = await fetch(`${window.API_BASE_URL || ''}/api/products`);
+                const products = await resProd.json();
+                document.getElementById('statProducts').textContent = products.length || 0;
+
+                const resCat = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
+                const categories = await resCat.json();
+                document.getElementById('statCategories').textContent = categories.length || 0;
+
+                const resCatalogues = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`);
+                const catalogues = await resCatalogues.json();
+                document.getElementById('statCatalogues').textContent = catalogues.length || 0;
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('inquiriesTableBody').innerHTML = '<tr><td colspan="5" style="color: red; text-align:center; padding: 20px;">Error loading data.</td></tr>';
+            }
+        }
+
+        async function clearMessages() {
+            if (!confirm('Are you sure you want to delete all inquiries? This action cannot be undone.')) return;
+            
+            try {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/inquiries`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (res.status === 401 || res.status === 403) {
+                    logout();
+                    return;
+                }
+                
+                if (res.ok) {
+                    fetchData();
+                } else {
+                    alert('Failed to clear messages.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('An error occurred while clearing messages.');
+            }
+        }
+
+        // Load data on start
+        fetchData();
+    </script>
+
+</body>
+
+</html>

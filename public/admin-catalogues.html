@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Catalogues</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-bg: #111827;
+            --sidebar-hover: #1f2937;
+            --sidebar-active: #0f172a;
+            --sidebar-text: #94a3b8;
+            --primary: #2dd4bf;
+            --primary-dark: #0d9488;
+            --danger: #ef4444;
+            --danger-bg: #fee2e2;
+            --warning: #f59e0b;
+            --warning-bg: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #f1f5f9;
+            --text-main: #334155;
+            --text-muted: #94a3b8;
+            --sidebar-w: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+        }
+
+        .sidebar-logo .brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-logo .brand span {
+            color: var(--primary);
+        }
+
+        .sidebar-logo small {
+            color: var(--sidebar-text);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 10px 16px;
+            overflow-y: auto;
+        }
+
+        .nav-section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #475569;
+            padding: 16px 8px 8px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a .icon {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-footer button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .sidebar-footer button:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Main layout */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Topbar */
+        .topbar {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Page content */
+        .page-content {
+            padding: 32px;
+            flex: 1;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            background: #f8fafc;
+            padding: 14px 24px;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .badge-teal {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: #022c22;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        .btn-delete {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+
+        .btn-delete:hover {
+            background: #fee2e2;
+        }
+
+        .form-container {
+            display: none;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="brand">DEV<span>SEAS</span></div>
+            <small>Admin Panel</small>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main</div>
+            <a href="/admin/dashboard"><span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard</a>
+            <div class="nav-section-label">Catalogue</div>
+            <a href="/admin/categories"><span class="icon"><i class="fas fa-tags"></i></span> Categories</a>
+            <a href="/admin/products"><span class="icon"><i class="fas fa-flask"></i></span> Products</a>
+            <a href="/admin/catalogues" class="active"><span class="icon"><i class="fas fa-file-pdf"></i></span> Catalogues</a>
+            <div class="nav-section-label">Communication</div>
+            <a href="/admin/dashboard"><span class="icon"><i class="fas fa-envelope"></i></span> Inquiries</a>
+        </nav>
+        <div class="sidebar-footer">
+            <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-title">Catalogues</div>
+            <div class="topbar-right">
+                <span style="font-size:0.85rem; color: var(--text-muted);" id="welcomeName">Welcome, Admin</span>
+                <div class="admin-avatar" id="welcomeInitial">A</div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-file-pdf" style="color:#2dd4bf;margin-right:8px;"></i> All Catalogues</span>
+                    <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> Add Catalogue</button>
+                </div>
+
+                <div class="form-container" id="catalogueFormContainer">
+                    <form id="addCatalogueForm" enctype="multipart/form-data" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <label class="form-label">Catalogue Name *</label>
+                            <input type="text" id="catName" name="name" class="form-control" placeholder="e.g. Pharmaceutical Catalogue 2026" required>
+                        </div>
+                        <div>
+                            <label class="form-label">File (PDF) *</label>
+                            <input type="file" id="catFile" name="file" class="form-control" accept="application/pdf" required>
+                        </div>
+
+                        <div style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                            <button type="button" class="btn" style="background:#e2e8f0; color:#475569;" onclick="toggleForm()">Cancel</button>
+                            <button type="submit" class="btn btn-add"><i class="fas fa-check"></i> Upload Catalogue</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>File Name</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cataloguesTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        const userStr = localStorage.getItem('adminUser');
+        if (!token) window.location.href = '/admin/login';
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
+            document.getElementById('welcomeInitial').textContent = user.name.charAt(0).toUpperCase();
+        }
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin/login';
+        }
+
+        function toggleForm() {
+            const container = document.getElementById('catalogueFormContainer');
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+                document.getElementById('addCatalogueForm').reset();
+            } else {
+                container.style.display = 'block';
+            }
+        }
+
+        fetchCatalogues();
+
+        async function fetchCatalogues() {
+            const tbody = document.getElementById('cataloguesTableBody');
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td></tr>';
+            try {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const catalogues = await res.json();
+
+                if (catalogues.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-file-pdf" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No catalogues found.</td></tr>';
+                } else {
+                    let html = '';
+                    catalogues.forEach(cat => {
+                        html += `
+                        <tr>
+                            <td style="color:#94a3b8;">${cat.id}</td>
+                            <td><strong style="color:#0f172a;">${cat.name}</strong></td>
+                            <td><a href="${window.API_BASE_URL || ''}/uploads/${cat.fileUrl}" target="_blank" style="color:var(--primary-dark); text-decoration:none;"><i class="fas fa-file-pdf"></i> ${cat.fileName}</a></td>
+                            <td style="color:#94a3b8; font-size:0.8rem;">${new Date(cat.createdAt).toLocaleDateString()}</td>
+                            <td>
+                                <button class="btn btn-sm btn-delete" onclick="deleteCatalogue(${cat.id})"><i class="fas fa-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; color:red;">Failed to load catalogues.</td></tr>';
+            }
+        }
+
+        document.getElementById('addCatalogueForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            try {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                if (res.ok) {
+                    toggleForm();
+                    fetchCatalogues();
+                } else {
+                    const data = await res.json();
+                    alert(data.error || 'Failed to upload catalogue');
+                }
+            } catch (err) { console.error(err); }
+        });
+
+        async function deleteCatalogue(id) {
+            if (!confirm('Are you sure you want to delete this catalogue?')) return;
+            try {
+                const res = await fetch(`/api/catalogues/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) fetchCatalogues();
+            } catch (err) { console.error(err); }
+        }
+    </script>
+</body>
+
+</html>

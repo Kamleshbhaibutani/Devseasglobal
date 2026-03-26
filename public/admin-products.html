@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-bg: #111827;
+            --sidebar-hover: #1f2937;
+            --sidebar-active: #0f172a;
+            --sidebar-text: #94a3b8;
+            --primary: #2dd4bf;
+            --primary-dark: #0d9488;
+            --danger: #ef4444;
+            --danger-bg: #fee2e2;
+            --warning: #f59e0b;
+            --warning-bg: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #f1f5f9;
+            --text-main: #334155;
+            --text-muted: #94a3b8;
+            --sidebar-w: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--sidebar-bg);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            padding: 24px 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+        }
+
+        .sidebar-logo .brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-logo .brand span {
+            color: var(--primary);
+        }
+
+        .sidebar-logo small {
+            color: var(--sidebar-text);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 10px 16px;
+            overflow-y: auto;
+        }
+
+        .nav-section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #475569;
+            padding: 16px 8px 8px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a .icon {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-footer button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .sidebar-footer button:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Main layout */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Topbar */
+        .topbar {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Page content */
+        .page-content {
+            padding: 32px;
+            flex: 1;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            background: #f8fafc;
+            padding: 14px 24px;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .badge-teal {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: #022c22;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        .btn-edit {
+            background: var(--warning-bg);
+            color: var(--warning);
+            border: 1px solid #fde68a;
+        }
+
+        .btn-edit:hover {
+            background: #fef3c7;
+        }
+
+        .btn-delete {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+
+        .btn-delete:hover {
+            background: #fee2e2;
+        }
+
+        .form-container {
+            display: none;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="brand">DEV<span>SEAS</span></div>
+            <small>Admin Panel</small>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main</div>
+            <a href="/admin/dashboard"><span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard</a>
+            <div class="nav-section-label">Catalogue</div>
+            <a href="/admin/categories"><span class="icon"><i class="fas fa-tags"></i></span> Categories</a>
+            <a href="/admin/products" class="active"><span class="icon"><i class="fas fa-flask"></i></span>
+                Products</a>
+            <a href="/admin/catalogues"><span class="icon"><i class="fas fa-file-pdf"></i></span> Catalogues</a>
+            <div class="nav-section-label">Communication</div>
+            <a href="/admin/dashboard"><span class="icon"><i class="fas fa-envelope"></i></span> Inquiries</a>
+        </nav>
+        <div class="sidebar-footer">
+            <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-title">Products</div>
+            <div class="topbar-right">
+                <span style="font-size:0.85rem; color: var(--text-muted);" id="welcomeName">Welcome, Admin</span>
+                <div class="admin-avatar" id="welcomeInitial">A</div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <div class="card">
+                <div class="card-header" style="flex-wrap: wrap; gap: 10px;">
+                    <span><i class="fas fa-flask" style="color:#2dd4bf;margin-right:8px;"></i> All Products</span>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <div style="position: relative;">
+                            <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 0.85rem;"></i>
+                            <input type="text" id="productSearch" class="form-control" style="width: 200px; padding: 6px 12px 6px 30px; font-size: 0.85rem;" placeholder="Search products..." onkeyup="filterProducts()">
+                        </div>
+                        <select id="productSort" class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.85rem;" onchange="filterProducts()">
+                            <option value="default">Sort by</option>
+                            <option value="az">Name: A-Z</option>
+                            <option value="za">Name: Z-A</option>
+                        </select>
+                        <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> <span
+                                id="addBtnText">Add Product</span></button>
+                    </div>
+                </div>
+
+                <div class="form-container" id="productFormContainer">
+                    <form id="addProductForm" enctype="multipart/form-data"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <label class="form-label">Product Name *</label>
+                            <input type="text" id="prodName" name="name" class="form-control" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Category *</label>
+                            <select id="prodCategory" name="categoryId" class="form-control" required>
+                                <option value="">Select Category...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Image (Optional)</label>
+                            <input type="file" id="prodImage" name="image" class="form-control" accept="image/*">
+                        </div>
+                        <div>
+                            <label class="form-label">CAS Number</label>
+                            <input type="text" id="prodCas" name="cas_number" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Chemical Formula</label>
+                            <input type="text" id="prodFormula" name="chemical_formula" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Short Description</label>
+                            <input type="text" id="prodDesc" name="description" class="form-control">
+                        </div>
+                        <div>
+                            <label class="form-label">Purity / Percentage <small style="color:#94a3b8;font-weight:400;">(shown on card top-left)</small></label>
+                            <input type="text" id="prodPurity" name="purity" class="form-control" placeholder="e.g. 99%, 99.5%, Pure">
+                        </div>
+                        <div>
+                            <label class="form-label">Grade / Specification <small style="color:#94a3b8;font-weight:400;">(shown on card top-right)</small></label>
+                            <input type="text" id="prodGrade" name="grade" class="form-control" placeholder="e.g. IP/BP/USP, Tech Grade, Food Grade">
+                        </div>
+                        <div>
+                            <label class="form-label">Price <small style="color:#94a3b8;font-weight:400;">(shown instead of Contact for pricing)</small></label>
+                            <input type="text" id="prodPrice" name="price" class="form-control" placeholder="e.g. $50/kg or ₹500/kg">
+                        </div>
+                        <div
+                            style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                            <button type="button" class="btn" style="background:#e2e8f0; color:#475569;"
+                                onclick="toggleForm()">Cancel</button>
+                            <button type="submit" class="btn btn-add"><i class="fas fa-check"></i> <span
+                                    id="submitBtnText">Save Product</span></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>CAS No.</th>
+                                    <th>Formula</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        const userStr = localStorage.getItem('adminUser');
+        if (!token) window.location.href = '/admin/login';
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
+            document.getElementById('welcomeInitial').textContent = user.name.charAt(0).toUpperCase();
+        }
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin/login';
+        }
+
+        let editingProductId = null;
+        let pList = [];
+
+        function toggleForm(isEdit = false) {
+            const container = document.getElementById('productFormContainer');
+
+            if (!isEdit) {
+                editingProductId = null;
+                document.getElementById('addProductForm').reset();
+                document.getElementById('addBtnText').innerText = "Add Product";
+                document.getElementById('submitBtnText').innerText = "Save Product";
+            }
+
+            if (container.style.display === 'block' && !isEdit) {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+            }
+        }
+
+        loadCategories();
+        fetchProducts();
+
+        async function loadCategories() {
+            try {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const categories = await res.json();
+                if (!Array.isArray(categories)) throw new Error('Invalid response');
+                const select = document.getElementById('prodCategory');
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    select.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Categories load error:', err);
+            }
+        }
+
+        async function fetchProducts() {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td></tr>';
+            try {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/products`);
+                if (!res.ok) throw new Error(`Server error: HTTP ${res.status}`);
+                const products = await res.json();
+                if (!Array.isArray(products)) throw new Error('Invalid data from server');
+                pList = products;
+                filterProducts();
+            } catch (err) {
+                console.error('Products load error:', err);
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 40px; color:#ef4444;"><i class="fas fa-exclamation-triangle" style="font-size:2rem; margin-bottom:12px;"></i><br>Failed to load products.<br><small style="color:#94a3b8;">${err.message}</small><br><br><button class="btn btn-add" onclick="fetchProducts()">Retry</button></td></tr>`;
+            }
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('productSearch') ? document.getElementById('productSearch').value.toLowerCase() : '';
+            const sort = document.getElementById('productSort') ? document.getElementById('productSort').value : 'default';
+            
+            let filtered = pList.filter(p => {
+                return (p.name && p.name.toLowerCase().includes(query)) || 
+                       (p.casNumber && p.casNumber.toLowerCase().includes(query)) ||
+                       (p.formula && p.formula.toLowerCase().includes(query)) ||
+                       (p.description && p.description.toLowerCase().includes(query)) ||
+                       (p.category && p.category.name && p.category.name.toLowerCase().includes(query));
+            });
+
+            if (sort === 'az') {
+                filtered.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+            } else if (sort === 'za') {
+                filtered.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+            }
+
+            renderProducts(filtered);
+        }
+
+        function renderProducts(products) {
+            const tbody = document.getElementById('productsTableBody');
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No products found. Click "Add Product" to get started.</td></tr>';
+                return;
+            }
+            let html = '';
+            products.forEach(p => {
+                let imgHtml = p.image
+                    ? `<img src="${window.API_BASE_URL || ''}/uploads/${p.image}" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">`
+                    : `<div style="width:40px; height:40px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-flask"></i></div>`;
+
+                html += `
+                <tr>
+                    <td>${imgHtml}</td>
+                    <td>
+                        <strong style="color:#0f172a;">${p.name}</strong><br>
+                        <small style="color:#94a3b8;">${p.description ? p.description.substring(0, 45) + '...' : ''}</small>
+                    </td>
+                    <td><span class="badge-teal">${p.category ? p.category.name : '—'}</span></td>
+                    <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.casNumber || '—'}</td>
+                    <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.formula || '—'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-pen"></i> Edit</button>
+                        <button class="btn btn-sm btn-delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function editProduct(id) {
+            const product = pList.find(p => p.id === id);
+            if (!product) return;
+
+            editingProductId = product.id;
+
+            document.getElementById('prodName').value = product.name || '';
+            document.getElementById('prodCategory').value = product.categoryId || '';
+            document.getElementById('prodCas').value = product.casNumber || '';
+            document.getElementById('prodFormula').value = product.formula || '';
+            document.getElementById('prodDesc').value = product.description || '';
+            document.getElementById('prodPurity').value = product.purity || '';
+            document.getElementById('prodGrade').value = product.grade || '';
+            document.getElementById('prodPrice').value = product.price || '';
+
+            document.getElementById('addBtnText').innerText = "Edit Product";
+            document.getElementById('submitBtnText').innerText = "Update Product";
+
+            toggleForm(true);
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            let url = '/api/products';
+            let method = 'POST';
+
+            if (editingProductId) {
+                url = `/api/products/${editingProductId}`;
+                method = 'PUT';
+            }
+
+            try {
+                const res = await fetch(url, {
+                    method: method,
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                if (res.ok) {
+                    toggleForm();
+                    fetchProducts();
+                } else { alert('Failed to save product'); }
+            } catch (err) { console.error(err); }
+        });
+
+        async function deleteProduct(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            try {
+                const res = await fetch(`/api/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) fetchProducts();
+            } catch (err) { console.error(err); }
+        }
+    </script>
+</body>
+
+</html>
