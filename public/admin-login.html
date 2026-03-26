@@ -246,7 +246,7 @@
                     // Success! Store token and redirect
                     localStorage.setItem('adminToken', data.token);
                     localStorage.setItem('adminUser', JSON.stringify(data.user));
-                    window.location.href = '/admin/dashboard';
+                    window.location.href = '/admin-dashboard.html';
                 } else {
                     const errorMsg = data.message ? `${data.error}: ${data.message}` : (data.error || 'Authentication failed');
                     errorDiv.textContent = errorMsg;
