@@ -418,7 +418,13 @@
     </div>
 
     <script>
+        // Update this URL with your actual Render backend URL (e.g., https://devseas-backend.onrender.com)
+        window.API_BASE_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') 
+            ? '' 
+            : 'https://api.devseasglobal.com';
+
         const token = localStorage.getItem('adminToken');
+
         const userStr = localStorage.getItem('adminUser');
         if (!token) window.location.href = '/admin/login';
         if (userStr) {
@@ -500,7 +506,8 @@
         async function deleteCatalogue(id) {
             if (!confirm('Are you sure you want to delete this catalogue?')) return;
             try {
-                const res = await fetch(`/api/catalogues/${id}`, {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/catalogues/${id}`, {
+
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });

@@ -476,7 +476,13 @@
     </div>
 
     <script>
+        // Update this URL with your actual Render backend URL (e.g., https://devseas-backend.onrender.com)
+        window.API_BASE_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') 
+            ? '' 
+            : 'https://api.devseasglobal.com';
+
         const token = localStorage.getItem('adminToken');
+
         const userStr = localStorage.getItem('adminUser');
         if (!token) window.location.href = '/admin/login';
         if (userStr) {
@@ -625,11 +631,12 @@
             e.preventDefault();
             const formData = new FormData(e.target);
 
-            let url = '/api/products';
+            let url = `${window.API_BASE_URL || ''}/api/products`;
+
             let method = 'POST';
 
             if (editingProductId) {
-                url = `/api/products/${editingProductId}`;
+                url = `${window.API_BASE_URL || ''}/api/products/${editingProductId}`;
                 method = 'PUT';
             }
 
@@ -639,6 +646,8 @@
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
                 });
+
+
                 if (res.ok) {
                     toggleForm();
                     fetchProducts();
@@ -649,7 +658,8 @@
         async function deleteProduct(id) {
             if (!confirm('Are you sure you want to delete this product?')) return;
             try {
-                const res = await fetch(`/api/products/${id}`, {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/products/${id}`, {
+
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });

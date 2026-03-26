@@ -1,4 +1,8 @@
-window.API_BASE_URL = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname.includes('onrender.com') ? '' : 'https://api.devseasglobal.com';
+// Update this URL with your actual Render backend URL (e.g., https://devseas-backend.onrender.com)
+window.API_BASE_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') 
+    ? '' 
+    : 'https://api.devseasglobal.com'; 
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
