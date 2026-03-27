@@ -72,10 +72,10 @@ body.light-mode {
     box-sizing: border-box;
 }
 
-html,
+/* html,
 body {
     overflow-x: hidden;
-}
+} */
 
 
 body {
