@@ -176,6 +176,38 @@
         .login-footer:hover {
             color: #2dd4bf;
         }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.78rem;
+            color: #475569;
+            text-decoration: none;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: #2dd4bf;
+        }
+
+        #forgotPasswordForm {
+            display: none;
+        }
+
+        .back-to-login {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .back-to-login:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -208,8 +240,24 @@
                         required>
                 </div>
             </div>
+            <a href="#" id="showForgot" class="forgot-link">Forgot Password?</a>
             <button type="submit" class="btn-login"><i class="fas fa-right-to-bracket"></i> Sign In</button>
         </form>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotPasswordForm">
+            <div id="forgotMsg" style="font-size: 0.85rem; margin-bottom: 15px; text-align: center; display: none;"></div>
+            <div class="form-group">
+                <label class="form-label">Admin Email</label>
+                <div class="input-wrap">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="forgotEmail" class="form-control" placeholder="Enter Registered Email" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-login"><i class="fas fa-paper-plane"></i> Send Reset Link</button>
+            <a href="#" id="showLogin" class="back-to-login"><i class="fas fa-arrow-left"></i> Back to Login</a>
+        </form>
+
         <a href="/" class="login-footer">Protected area — Return to Home</a>
     </div>
 
@@ -255,6 +303,61 @@
             } catch (error) {
                 errorDiv.textContent = 'Network error. Please try again.';
                 errorDiv.style.display = 'block';
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // --- Forgot Password Logic ---
+        const loginForm = document.getElementById('adminLoginForm');
+        const forgotForm = document.getElementById('forgotPasswordForm');
+        const showForgot = document.getElementById('showForgot');
+        const showLogin = document.getElementById('showLogin');
+
+        showForgot.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            forgotForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            forgotForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        forgotForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-login');
+            const msgDiv = document.getElementById('forgotMsg');
+            const originalText = btn.innerHTML;
+
+            msgDiv.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/forgot-password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: document.getElementById('forgotEmail').value })
+                });
+
+                const data = await response.json();
+                
+                msgDiv.style.display = 'block';
+                if (response.ok) {
+                    msgDiv.style.color = '#2dd4bf';
+                    msgDiv.textContent = data.message;
+                    this.reset();
+                } else {
+                    msgDiv.style.color = '#ef4444';
+                    msgDiv.textContent = data.error || 'Something went wrong';
+                }
+            } catch (error) {
+                msgDiv.style.color = '#ef4444';
+                msgDiv.textContent = 'Network error. Try again.';
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
