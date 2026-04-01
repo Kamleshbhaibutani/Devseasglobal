@@ -12,27 +12,10 @@ const prisma = new PrismaClient();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
 
-// Production Database Sync (for Render)
-if (process.env.NODE_ENV === 'production') {
-    try {
-        const dbUrl = process.env.DATABASE_URL || '';
-        console.log('🚀 Production environment detected. Syncing database...');
-        
-        if (dbUrl) {
-            // Ensure client is generated and schema is pushed
-            const { execSync } = require('child_process');
-            console.log('🔄 Running: npx prisma db push...');
-            execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
-            
-            console.log('🌱 Running: node prisma/seed.js...');
-            execSync('node prisma/seed.js', { stdio: 'inherit' });
-            
-            console.log('✅ Database production sync complete');
-        }
-    } catch (err) {
-        console.error('❌ Production database sync failed:', err.message);
-    }
-}
+// --- PRODUCTION NOTE ---
+// Do not use automatic 'prisma db push' or 'seed.js' on every restart in production.
+// This can cause data loss if there are schema mismatches or if seed.js resets records.
+// Run migrations during build time or manually.
 
 // Test Database Connection
 prisma.$connect()
