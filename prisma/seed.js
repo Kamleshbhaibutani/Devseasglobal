@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
     // ─── Admin User ───────────────────────────────────────────────
-    const adminEmail = 'admin@devseas.com';
+    const adminEmail = 'butani890@gmail.com';
     const hashedPassword = await bcrypt.hash('Devseas@123123', 10);
     const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
     
