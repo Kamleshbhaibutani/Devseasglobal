@@ -33,7 +33,27 @@ const transporter = nodemailer.createTransport({
 
 // Test Database Connection
 prisma.$connect()
-    .then(() => console.log('✅ Successfully connected to Database'))
+    .then(async () => {
+        console.log('✅ Successfully connected to Database');
+        
+        // --- One-time Database Patch (Force Update Admin Email) ---
+        try {
+            const currentAdmin = await prisma.user.findFirst({
+                where: { isAdmin: true }
+            });
+
+            if (currentAdmin && currentAdmin.email !== 'butani890@gmail.com') {
+                console.log(`🛠️ Updating admin from ${currentAdmin.email} to butani890@gmail.com...`);
+                await prisma.user.update({
+                    where: { id: currentAdmin.id },
+                    data: { email: 'butani890@gmail.com' }
+                });
+                console.log('✅ Admin email successfully updated in DB.');
+            }
+        } catch (patchErr) {
+            console.error('❌ Database patch failed:', patchErr.message);
+        }
+    })
     .catch(err => console.error('❌ Database connection error:', err));
 
 app.use(cors());
