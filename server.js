@@ -155,9 +155,12 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/forgot-password', async (req, res) => {
     try {
         const { email } = req.body;
+        console.log(`🔍 DEBUG: Request received for password reset: ${email}`);
         if (!email) return res.status(400).json({ error: 'Email is required' });
 
         const user = await prisma.user.findUnique({ where: { email } });
+        console.log(`🔍 DEBUG: User found in DB: ${user ? 'Yes (' + user.name + ')' : 'No'}`);
+        
         if (!user) {
             // Act as if it was sent for security
             return res.json({ success: true, message: 'If an account exists, a reset link has been sent.' });
